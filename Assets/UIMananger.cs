@@ -45,7 +45,13 @@ public class UIMananger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        string _option = previousOption;
+        if (_option == "OK" || _option == "Pointer")
+        {
+            _option = "";
+        }
         
+        userOption.text = userOptionDark.text =  _option;
         // Test lives
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -61,13 +67,13 @@ public class UIMananger : MonoBehaviour
         UpdateLives(total_lives, cpu_lives, cpuLives);
     }
 
+    private string previousOption = "";
     public void UpdateUserOption(string option)
     {
-        print(option);
-        if (userOption.text != option)
+        if (option != previousOption)
         {
-            userOption.text = option;
-            userOptionDark.text = option;
+            print(option);
+            previousOption = option;
         }
     }
 

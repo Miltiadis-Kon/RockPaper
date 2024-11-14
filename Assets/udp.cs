@@ -24,7 +24,7 @@ public class udp : MonoBehaviour
         IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, port);
         byte[] bytes = client.EndReceive(ar, ref groupEP);
         string message = Encoding.UTF8.GetString(bytes);
-        Debug.Log($"Received message: {message}");
+    //    Debug.Log($"Received message: {message}");
 
         // Process the received message here
         HandleUdpMessage(message);
