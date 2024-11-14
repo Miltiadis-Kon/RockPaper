@@ -7,10 +7,16 @@ using UnityEngine;
 public class udp : MonoBehaviour
 {
 
-    public UIMananger manager ;
+    public GameMngr manager;
     private UdpClient udpClient;
     private int port = 8000;
 
+
+    void Awake()
+    {
+        if(manager==null)
+        manager = GameObject.Find("GameMananger").GetComponent<GameMngr>();
+    }
     void Start()
     {
         udpClient = new UdpClient(port);

@@ -5,6 +5,7 @@ using TMPro;
 
 public class UIMananger : MonoBehaviour
 {
+    public GameMngr manager;
 
     //Define life and death assets
     public GameObject life = new GameObject();
@@ -27,8 +28,11 @@ public class UIMananger : MonoBehaviour
     public int cpu_lives = 5;
     
 
-
-
+        void Awake()
+    {
+        if(manager==null)
+        manager = GameObject.Find("GameMananger").GetComponent<GameMngr>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -45,12 +49,7 @@ public class UIMananger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string _option = previousOption;
-        if (_option == "OK" || _option == "Pointer")
-        {
-            _option = "";
-        }
-        
+        string _option = manager.previousOption;
         userOption.text = userOptionDark.text =  _option;
         // Test lives
         if (Input.GetKeyDown(KeyCode.Space))
@@ -66,17 +65,6 @@ public class UIMananger : MonoBehaviour
         UpdateLives(total_lives, user_lives, userLives);
         UpdateLives(total_lives, cpu_lives, cpuLives);
     }
-
-    private string previousOption = "";
-    public void UpdateUserOption(string option)
-    {
-        if (option != previousOption)
-        {
-            print(option);
-            previousOption = option;
-        }
-    }
-
 
 
     private void UpdateLives(int total_lives,int lives,Transform parent)
