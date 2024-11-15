@@ -58,7 +58,6 @@ public class GameMngr : MonoBehaviour
     public void PlayGame()
     {
         newGame = false; // Do not allow new game until this one is finished
-        uiManager.ShowChoices("", ""); // Clear the choices
         if (previousOption=="") 
         {
             Debug.Log("Player choice is empty");
@@ -95,6 +94,7 @@ public class GameMngr : MonoBehaviour
     {
         int countdown = 3;
         newGame = true;
+        uiManager.ShowChoices("", "Thinking..."); // Clear the choices
         while (countdown > 0)
         {
             Debug.Log(countdown);
