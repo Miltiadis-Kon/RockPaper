@@ -11,6 +11,7 @@ public class GameMngr : MonoBehaviour
         Scissors
     }
 
+    public bool newGame = false;
     
     public UIMananger uiManager;
 
@@ -56,6 +57,8 @@ public class GameMngr : MonoBehaviour
 
     public void PlayGame()
     {
+        newGame = false; // Do not allow new game until this one is finished
+        uiManager.ShowChoices("", ""); // Clear the choices
         if (previousOption=="") 
         {
             Debug.Log("Player choice is empty");
@@ -65,6 +68,7 @@ public class GameMngr : MonoBehaviour
 
         cpuChoice = (Choice)Random.Range(0, 3);
         playerChoice = (Choice)System.Enum.Parse(typeof(Choice), previousOption);
+        uiManager.ShowChoices($"{playerChoice}", $"{cpuChoice}");
         DetermineWinner();
         previousOption = ""; // Reset the player choice 
         }
@@ -90,6 +94,7 @@ public class GameMngr : MonoBehaviour
     public IEnumerator StartCountdownAndPlay()
     {
         int countdown = 3;
+        newGame = true;
         while (countdown > 0)
         {
             Debug.Log(countdown);

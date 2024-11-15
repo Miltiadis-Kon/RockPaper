@@ -47,11 +47,20 @@ public class UIMananger : MonoBehaviour
         SetupLives();
     }
 
+    public void ShowChoices(string userChoice, string cpuChoice)
+    {
+        userOption.text = userOptionDark.text = userChoice;
+        comOption.text = comOptionDark.text = cpuChoice;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(manager.newGame)
+        {
         string _option = manager.previousOption;
         userOption.text = userOptionDark.text =  _option;
+        }
 
     }
 
