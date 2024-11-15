@@ -2321,6 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6f928491685274bbd390e422802364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGame: 0
   uiManager: {fileID: 367565119}
   previousOption: 
   playerChoice: 0

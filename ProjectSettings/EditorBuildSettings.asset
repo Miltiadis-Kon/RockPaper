@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TestAnimator.unity
-    guid: 49aaa2374d47645399fa8837f75a0a47
+    path: Assets/Scenes/MainMenu.unity
+    guid: d3269f10e47c9b34a89aa7ad642e9897
+  - enabled: 1
+    path: Assets/Scenes/RPS.unity
+    guid: 09ced5247c6b92c49abdbe4f7c9ae8f1
   m_configObjects: {}
