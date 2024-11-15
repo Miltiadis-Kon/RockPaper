@@ -11,7 +11,7 @@ public class GameMngr : MonoBehaviour
         Scissors
     }
 
-    public bool newGame = false;
+    public bool newGame = false; // Flag to prevent new game until current one is finished
     
     public UIMananger uiManager;
 
@@ -30,22 +30,32 @@ public class GameMngr : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(StartCountdownAndPlay());
-        }
-    }
+     void Update()
+     {
+         if (Input.GetKeyDown(KeyCode.Space))
+         {
+             StartCoroutine(StartCountdownAndPlay());
+         }
+     }
 
 
     public void UpdateUserOption(string option)
     {
+
         if (option != previousOption)
         {
-            if (option == "OK" || option == "Pointer")
+            if (option=="Yes" && !newGame)
             {
-            option = "";
+            StartCoroutine(StartCountdownAndPlay());
+            }
+            else if (option == "OK" || option == "Pointer" || (option == "Yes" && newGame) || (option == "No" && newGame))
+            {
+                option = "";
+            }
+            else if (option == "No" && !newGame)
+            {
+                uiManager.ShowChoices("", "Goodbye!");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
             }
             Debug.Log($"Received option: {option}");
             previousOption = option;

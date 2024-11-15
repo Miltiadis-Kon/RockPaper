@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIMananger : MonoBehaviour
@@ -23,11 +24,19 @@ public class UIMananger : MonoBehaviour
 
     public TMP_Text countdownTxt;
 
+    public Button guideBtn;
+    public Transform guidePanel;
+
     // Test variables
     public int total_lives = 5;
     public int user_lives = 5;
     public int cpu_lives = 5;
     
+
+    public void ShowHideGuide()
+    {
+        guidePanel.gameObject.SetActive(!guidePanel.gameObject.activeSelf);
+    } 
 
         void Awake()
     {
@@ -38,11 +47,15 @@ public class UIMananger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        userOption.text = "";
-        userOptionDark.text = "";
+        userOption.text = "...";
+        userOptionDark.text = "...";
 
-        comOption.text = "Awaiting...";
-        comOptionDark.text = "Awaiting...";
+        comOption.text = "...";
+        comOptionDark.text = "...";
+
+        countdownTxt.text = "Thumb up to play!";
+
+        guideBtn.onClick.AddListener(ShowHideGuide);
 
         SetupLives();
     }
@@ -115,9 +128,27 @@ public class UIMananger : MonoBehaviour
                 countdownTxt.text = "It's a tie!";
                 break;
             case 2:
-                countdownTxt.text = "Game Over!";
+                if (user_lives > cpu_lives && cpu_lives <= 0)
+                {
+                    userOption.text = userOptionDark.text = "You won!";
+                }
+                else
+                {
+                    userOption.text = userOptionDark.text = "You lost!";
+                }
+                ResetGame();
                 break;
         }
+    }
+
+    private void ResetGame()
+    {
+        user_lives = total_lives;
+        cpu_lives = total_lives;
+        manager.newGame = false;
+
+        countdownTxt.text = "Thumb up to play!";
+        SetupLives();
     }
 
 
